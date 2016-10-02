@@ -2,8 +2,7 @@
 #include <sstream>
 #include <vector>
 
-//http://stackoverflow.com/questions/236129/split-a-string-in-c
-void _strsplit(const std::string &s, char delim, std::vector<std::string> &elems, bool stop_on_first) {
+void _strsplit(const std::string &s, char delim, std::vector<std::string> &elems, bool first_occur) {
 	char iter_delim = delim;
 
 	std::stringstream ss;
@@ -13,16 +12,15 @@ void _strsplit(const std::string &s, char delim, std::vector<std::string> &elems
 	while (getline(ss, item, iter_delim)) {
 		elems.push_back(item);
 
-		if (elems.size() == 1 && stop_on_first) iter_delim = NULL;
+		if (elems.size() == 1 && first_occur) iter_delim = NULL;
 	}
 
 	ss.clear();
 }
 
-//http://stackoverflow.com/questions/236129/split-a-string-in-c
-std::vector<std::string> strsplit(const std::string &s, char delim, bool stop_on_first) {
+std::vector<std::string> strsplit(const std::string &s, char delim, bool first_occur) {
 	std::vector<std::string> elems;
-	_strsplit(s, delim, elems, stop_on_first);
+	_strsplit(s, delim, elems, first_occur);
 	return elems;
 }
 

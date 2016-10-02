@@ -5,28 +5,17 @@
 class Index
 {
 public:
-
-	// Inner Classes ---------------------
-
 	class Entry;
-
-	// Constructor/Destructor ------------
 
 	Index(std::string archive_path, std::string archive_filename);
 	~Index();
-
-	// Variables ------------------
-
-	std::vector<Index::Entry> entries;
-	bool valid;
+	std::vector<Entry> entries();
+	bool good();
 
 private:
-
-	// Variables -----------------
-
 	std::string _archive_path, _archive_name;
-
-	// Methods --------------------
+	std::vector<Entry> _entries;
+	bool _valid;
 
 	void _fetch(std::string path);
 };
@@ -34,14 +23,9 @@ private:
 class Index::Entry
 {
 public:
-
-	// Constructor/Destructor -----------
+	std::string name, path;
 
 	Entry(std::string name, std::string path);
 	~Entry();
-
-	// Variables --------------
-
-	std::string name, path;
 };
 

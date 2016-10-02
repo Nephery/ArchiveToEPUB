@@ -9,7 +9,7 @@
 
 Index::Index(std::string archive_path, std::string archive_filename)
 {
-	this->valid = true;
+	this->_valid = true;
 	this->_archive_name = archive_filename;
 	this->_archive_path = archive_path;
 
@@ -18,9 +18,19 @@ Index::Index(std::string archive_path, std::string archive_filename)
 
 Index::~Index()
 {
-	entries.clear();
+	_entries.clear();
 	_archive_name.clear();
 	_archive_path.clear();
+}
+
+std::vector<Index::Entry> Index::entries()
+{
+	return _entries;
+}
+
+bool Index::good()
+{
+	return _valid;
 }
 
 void Index::_fetch(std::string path) 
@@ -28,10 +38,12 @@ void Index::_fetch(std::string path)
 	std::ifstream ifs(path);
 
 	if (!ifs.good()) {
-		this->valid = false;
+		std::cout << "error reading index.txt" << std::endl;
+		_valid = false;
 		ifs.close();
 		ifs.clear();
-		return;
+		std::cin.get();
+		exit(0);
 	}
 
 	for (std::string line; std::getline(ifs, line);)
@@ -44,17 +56,18 @@ void Index::_fetch(std::string path)
 
 		if (elems.size() !=2) {
 			std::cout << "index.txt has incorrect size at " + line + ", size is " << elems.size() << std::endl;
-			this->valid = false;
+			_valid = false;
 			ifs.close();
 			ifs.clear();
-			return;
+			std::cin.get();
+			exit(0);
 		}
 
-		Index::Entry entry(elems[1], elems[0]);
-		entries.push_back(entry);
+		Entry entry(elems[1], elems[0]);
+		_entries.push_back(entry);
 	}
 
-	entries.shrink_to_fit();
+	_entries.shrink_to_fit();
 	ifs.close();
 	ifs.clear();
 }
