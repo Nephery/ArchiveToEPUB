@@ -12,9 +12,8 @@ public:
 
 	static void init();
 private:
-	class Template;
-	Templates() {};
-	~Templates() {};
+	Templates();
+	~Templates();
 };
 
 class Templates::XHTML
@@ -25,9 +24,10 @@ public:
 protected:
 	static void fetch();
 private:
+	const static std::string _path;
 	static std::string _template;
-	XHTML() {};
-	~XHTML() {};
+	XHTML();
+	~XHTML();
 };
 
 class Templates::SVG
@@ -38,7 +38,8 @@ public:
 protected:
 	static void fetch();
 private:
+	const static std::string _path;
 	static std::string _template;
-	SVG() {};
-	~SVG() {};
+	SVG();
+	~SVG();
 };

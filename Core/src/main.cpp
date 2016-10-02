@@ -22,8 +22,8 @@ int main(int argc, char **argv)
 		std::cin.get();
 		return(0);
 	}
-	for (size_t i = 0; i < idx.entries().size(); i++) {
-		std::cout << "NAME: " + idx.entries()[i].name + "\nPATH: " + idx.entries()[i].path << std::endl;
+	for (size_t i = 0; i < idx.size(); i++) {
+		std::cout << "NAME: " + idx.get(i).name + "\nPATH: " + idx.get(i).path << std::endl;
 	}
 
 	Templates::init();

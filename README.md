@@ -1,4 +1,4 @@
-# ArchiveToEPUB (STILL IN DEVELOPMENT)
+# ArchiveToEPUB (IN DEVELOPMENT)
 A simple automation tool to convert CBC files to EPUBs.
 
 #Comic Book Collections (CBC)

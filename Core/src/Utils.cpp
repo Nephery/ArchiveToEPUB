@@ -4,10 +4,10 @@
 
 void _strsplit(const std::string &s, char delim, std::vector<std::string> &elems, bool first_occur) {
 	char iter_delim = delim;
-
 	std::stringstream ss;
-	ss.str(s);
 	std::string item;
+
+	ss.str(s);
 
 	while (getline(ss, item, iter_delim)) {
 		elems.push_back(item);

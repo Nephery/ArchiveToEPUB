@@ -8,12 +8,13 @@ public:
 	class Entry;
 
 	Index(std::string archive_path, std::string archive_filename);
-	~Index();
-	std::vector<Entry> entries();
-	bool good();
+	const Entry get(int i) const;
+	size_t size() const;
+	bool good() const;
 
 private:
-	std::string _archive_path, _archive_name;
+	const std::string _archive_path, _archive_name;
+
 	std::vector<Entry> _entries;
 	bool _valid;
 
@@ -23,9 +24,7 @@ private:
 class Index::Entry
 {
 public:
-	std::string name, path;
-
+	const std::string name, path;
 	Entry(std::string name, std::string path);
-	~Entry();
 };
 

@@ -1,36 +1,33 @@
 #include "Index.h"
 #include "Utils.h"
-#include <iostream>
 
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 
 
 Index::Index(std::string archive_path, std::string archive_filename)
+	:_archive_path(archive_path),
+	 _archive_name(archive_filename),
+	 _valid(true)
 {
-	this->_valid = true;
-	this->_archive_name = archive_filename;
-	this->_archive_path = archive_path;
-
 	_fetch(_archive_path + _archive_name);
 }
 
-Index::~Index()
+const Index::Entry Index::get(int i) const
 {
-	_entries.clear();
-	_archive_name.clear();
-	_archive_path.clear();
+	return _entries[i];
 }
 
-std::vector<Index::Entry> Index::entries()
-{
-	return _entries;
-}
-
-bool Index::good()
+bool Index::good() const
 {
 	return _valid;
+}
+
+size_t Index::size() const
+{
+	return _entries.size();
 }
 
 void Index::_fetch(std::string path) 
@@ -74,15 +71,7 @@ void Index::_fetch(std::string path)
 
 // INNER CLASS: Entry ----------------------------------------
 
-Index::Entry::Entry(std::string name, std::string path)
-{
-	this->name = name;
-	this->path = path;
-}
-
-
-Index::Entry::~Entry()
-{
-	name.clear();
-	path.clear();
-}
+Index::Entry::Entry(std::string sub_archive_name, std::string sub_archive_path)
+	:name(sub_archive_name),
+	 path(sub_archive_path)
+{}
